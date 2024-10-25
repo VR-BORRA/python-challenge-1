@@ -1,53 +1,26 @@
 # Menu dictionary
 menu = {
-    "Snacks": {
-        "Cookie": .99,
-        "Banana": .69,
-        "Apple": .49,
-        "Granola bar": 1.99
-    },
+    "Snacks": {"Cookie": 0.99, "Banana": 0.69, "Apple": 0.49, "Granola bar": 1.99},
     "Meals": {
         "Burrito": 4.49,
         "Teriyaki Chicken": 9.99,
         "Sushi": 7.49,
         "Pad Thai": 6.99,
-        "Pizza": {
-            "Cheese": 8.99,
-            "Pepperoni": 10.99,
-            "Vegetarian": 9.99
-        },
-        "Burger": {
-            "Chicken": 7.49,
-            "Beef": 8.49
-        }
+        "Pizza": {"Cheese": 8.99, "Pepperoni": 10.99, "Vegetarian": 9.99},
+        "Burger": {"Chicken": 7.49, "Beef": 8.49},
     },
     "Drinks": {
-        "Soda": {
-            "Small": 1.99,
-            "Medium": 2.49,
-            "Large": 2.99
-        },
-        "Tea": {
-            "Green": 2.49,
-            "Thai iced": 3.99,
-            "Irish breakfast": 2.49
-        },
-        "Coffee": {
-            "Espresso": 2.99,
-            "Flat white": 2.99,
-            "Iced": 3.49
-        }
+        "Soda": {"Small": 1.99, "Medium": 2.49, "Large": 2.99},
+        "Tea": {"Green": 2.49, "Thai iced": 3.99, "Irish breakfast": 2.49},
+        "Coffee": {"Espresso": 2.99, "Flat white": 2.99, "Iced": 3.49},
     },
     "Dessert": {
         "Chocolate lava cake": 10.99,
-        "Cheesecake": {
-            "New York": 4.99,
-            "Strawberry": 6.49
-        },
+        "Cheesecake": {"New York": 4.99, "Strawberry": 6.49},
         "Australian Pavlova": 9.99,
         "Rice pudding": 4.99,
-        "Fried banana": 4.49
-    }
+        "Fried banana": 4.49,
+    },
 }
 
 # 1. Set up order list. Order list will store a list of dictionaries for
@@ -105,17 +78,14 @@ while place_order:
                         print(f"{i}      | {key} - {key2}{item_spaces} | ${value2}")
                         menu_items[i] = {
                             "Item name": key + " - " + key2,
-                            "Price": value2
+                            "Price": value2,
                         }
                         i += 1
                 else:
                     num_item_spaces = 24 - len(key)
                     item_spaces = " " * num_item_spaces
                     print(f"{i}      | {key}{item_spaces} | ${value}")
-                    menu_items[i] = {
-                        "Item name": key,
-                        "Price": value
-                    }
+                    menu_items[i] = {"Item name": key, "Price": value}
                     i += 1
             # 2. Ask customer to input menu item number
             menu_selection = input("Enter item number of your choice: ")
@@ -124,7 +94,7 @@ while place_order:
             if menu_selection.isdigit():
                 print(f"Customer selected {menu_selection}")
                 # Convert the menu selection to an integer
-                menu_selection = int(menu_selection)            
+                menu_selection = int(menu_selection)
                 # 4. Check if the menu selection is in the menu items
                 if menu_selection in menu_items:
                     # Store the item name as a variable
@@ -137,9 +107,13 @@ while place_order:
                     if not item_quantity.isdigit():
                         item_quantity = 1
                     # Add the item name, price, and quantity to the order list
-                    order_list.append({"Item name":item_name,
-                                       "Price": "{:.2f}".format(item_price),
-                                       "Quantity": int(item_quantity)})
+                    order_list.append(
+                        {
+                            "Item name": item_name,
+                            "Price": "{:.2f}".format(item_price),
+                            "Quantity": int(item_quantity),
+                        }
+                    )
                 else:
                     # Tell the customer that their input isn't valid
                     print(f"Selected menu {menu_selection} is not valid.")
@@ -180,7 +154,7 @@ while place_order:
 print("This is what we are preparing for you.\n")
 
 # Uncomment the following line to check the structure of the order
-#print(order)
+# print(order)
 print("Item name                 | Price  | Quantity")
 print("--------------------------|--------|----------")
 
@@ -197,11 +171,15 @@ for items in order_list:
     item_name_space = item_space_len * " "
     price_space = price_len * " "
     # 10. Print the item name, price, and quantity
-    print(f"{ord_item_name}{item_name_space}| ${float(ord_item_price):,.2f}{price_space}| {ord_item_qty}")
+    print(
+        f"{ord_item_name}{item_name_space}| ${float(ord_item_price):,.2f}{price_space}| {ord_item_qty}"
+    )
 
 
 # 11. Calculate the cost of the order using list comprehension
 # Multiply the price by quantity for each item in the order list, then sum()
 # and print the prices.
-order_total = sum([float(item.get('Price')) * int(item.get('Quantity')) for item in order_list])
+order_total = sum(
+    [float(item.get("Price")) * int(item.get("Quantity")) for item in order_list]
+)
 print(f"\nTotal price for the order: ${order_total:,.2f}\n")
